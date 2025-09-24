@@ -1,72 +1,38 @@
-#include <iostream>
-#include <fstream>
+#// Created by Erica Quintero on 9/15/25
 #include "ArgumentManager.h"
-#include <string>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
-struct handshakes{
-    int person1;
-    int person2;
-    int person3; 
-    int person4; 
-    int person5; 
-};
+
+int main(int argc, char *argv[]) {
+    ArgumentManager am(argc, argv);
+    string input = am.get("input");
+    string output = am.get("output");
+    ifstream fin(input);
+    ofstream fout(output);
+
+    int count = 0;
+    fin >> count;
+    cout << count << endl;
+
+    // make an array list of type int that resizs itself
+    // or an array list of type string that resizes itself
 
 
-int Win(const handshakes interactions[], int numInteractions, int numPerson)
-{
-  
-    int* interaction_tracker = new int[numPerson];
-    for (int i = 0; i < numPerson; i++) {
-      interaction_tracker [interactions[i].person1]++;
-      interaction_tracker [interactions[i].person2]++;
-      interaction_tracker [interactions[i].person3]++;
-      interaction_tracker [interactions[i].person4]++;
-      interaction_tracker [interactions[i].person5]++;
-        if (interaction_tracker[i] == numPerson - 1) {
-            delete[] interaction_tracker;
-            return i;
-        }
+    int first, second = 0;
+    //use a structure and contains a list of strings and create a typename for it
+    //create an array list that resizes itself.
+
+    while(fin >> first >> second) {
+        cout << first << " " << second << endl;
+
     }
-  return -1;
-};
 
-int main(int argc, char* argv[]){
-      ArgumentManager am(argc, argv);
-      ifstream inputFile(am.get("input2.txt"));
-      ofstream outputFile(am.get("ans2.txt"));
-    //ifstream input(am.get("input2.txt")); 
-   //ofstream out(am.get("ans2.txt"));
-      
-      const int max_handshakes = 10000;//allow room for up to 10,000 interactions
-      handshakes interactions[max_handshakes];
 
-      int numPerson;
-      int index = 0;
-      int person1;
-      int person2;
-      int person3; 
-      int person4;
-      int person5;
-  
-      inputFile >> numPerson; 
-      while (inputFile >> person1 >> person2 >> person3 >>person4 >>          person5) {
-          interactions[index].person1 = person1; 
-          interactions[index].person2 = person2;
-          interactions[index].person3 = person3; 
-          interactions[index].person4 = person4; 
-          interactions[index].person5 = person5;
-          index++;
-      }
 
-      inputFile.close();
-      int winner = Win(interactions, index, numPerson);
-      if (winner != -1) {
-          cout << "The winner is person, " << winner << endl;
-      } 
-    else{
-      cout << "womp. womp." << endl; 
-    }
-      return 0;
+    return 0;
+
+
 }
